@@ -16,18 +16,17 @@ class TimezoneLocation:
 this_dir = os.path.abspath(os.path.dirname(__file__))
 tab_file = os.path.join(this_dir, 'zone1970.tab')
 
-def parse_tab() -> tuple[{str, TimezoneLocation}, {Location, TimezoneLocation}]:
+def parse_tab(force: bool = False) -> tuple[{str, TimezoneLocation}, {Location, TimezoneLocation}]:
     zone_to_location: {str, TimezoneLocation} = {}
     location_to_zone: {tuple, TimezoneLocation} = {}
 
-    if not os.path.exists(tab_file):
+    if force or not os.path.exists(tab_file):
         # from the Time Zone Database project
-        urlretrieve('https://github.com/eggert/tz/blob/main/zone1970.tab', tab_file)
+        urlretrieve('https://raw.githubusercontent.com/eggert/tz/refs/heads/main/zone1970.tab', tab_file)
     with open(tab_file, 'r') as tab:
         for line in tab:
             if line.startswith('#'):
                 continue
-            print(line)
             fields = line.split('\t')
             iso_loc = Location(fields[1])
             lat = iso_loc.lat.decimal
