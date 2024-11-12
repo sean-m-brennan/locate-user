@@ -27,6 +27,7 @@ def parse_tab() -> tuple[{str, TimezoneLocation}, {Location, TimezoneLocation}]:
         for line in tab:
             if line.startswith('#'):
                 continue
+            print(line)
             fields = line.split('\t')
             iso_loc = Location(fields[1])
             lat = iso_loc.lat.decimal
