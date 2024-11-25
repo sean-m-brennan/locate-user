@@ -3,3 +3,4 @@
 /src/tz/zone1970.tab
 /dist/
 /.vite/
+*.tsbuildinfo
