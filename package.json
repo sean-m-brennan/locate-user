@@ -1,0 +1,39 @@
+{
+  "name": "locate-user",
+  "version": "0.1.0",
+  "authors": [
+    "Sean Brennan <sean_m_brennan@mail.com>"
+  ],
+  "homepage": "https://sean-m-brennan.github.io/locate-user/",
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "main": "dist/locate-user.js",
+  "types": "dist/locate-user.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.7.9",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "download": "^8.0.0",
+    "parse-tzdata-coordinate": "^1.0.0",
+    "typescript": "~5.5.3",
+    "typescript-eslint": "^8.7.0",
+    "vite": "^5.4.11",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-eslint": "^1.8.1"
+  },
+  "scripts": {
+    "dev": "./node_modules/.bin/vite",
+    "build": "./build.sh && tsc -b && vite build",
+    "lint": "./node_modules/.bin/eslint .",
+    "preview": "./node_modules/.bin/vite preview"
+  }
+}

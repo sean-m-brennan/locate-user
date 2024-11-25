@@ -15,7 +15,8 @@ export function getBrowserTimeZoneOffset(): number {
         const hours = parseInt(offset.slice(1, 3), 10)
         const minutes = parseInt(offset.slice(4), 10)
         return sign * (hours * 60 + minutes)
-    } catch(err) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch(_err) {
         const date = new Date()
         return date.getTimezoneOffset()
     }
@@ -26,7 +27,8 @@ export function getApproximateBrowserLocation(): [number, number, number] {
     try {
         const loc = timezoneToLocation(tz)
         return [loc[0], loc[1], 10.0]  // sea-level
-    } catch(err) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch(_err) {
         const offset = getBrowserTimeZoneOffset()
         const lon = 180.0 / 12 * offset
         return [0.0, lon, 10.0]  // equator at sea-level

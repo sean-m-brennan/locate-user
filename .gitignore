@@ -1,0 +1,5 @@
+/node_modules/
+/src/tz/tz_table.ts
+/src/tz/zone1970.tab
+/dist/
+/.vite/

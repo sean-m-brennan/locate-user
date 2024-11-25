@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import path from "path"
 import download from "download"
-import * as fs from "node:fs";
-import parseTzdataCoordinate from "parse-tzdata-coordinate";
+import * as fs from "node:fs"
+import parseTzdataCoordinate from "parse-tzdata-coordinate"
 
 
 const baseDir = import.meta.dirname
