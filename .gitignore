@@ -1,7 +1,10 @@
 /node_modules/
-/src/tz/tz_table.ts
-/src/tz/zone1970.tab
+/tz/tz_table.ts
+/tz/zone1970.tab
 /dist/
 /.vite/
 *.tsbuildinfo
 /.turbo/
+/locate-user.cjs
+/locate-user.d.ts
+/locate-user.js

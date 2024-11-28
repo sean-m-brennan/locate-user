@@ -1,3 +1,3 @@
 # locate-user
 
-Browser location (roughly) without location services.
+Very approximate browser location without location services.

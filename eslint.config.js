@@ -3,13 +3,11 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 
-const paths = ['./src']
-
 export default tseslint.config(
-    { ignores: ['dist', 'attic'] },
+    { ignores: ['dist', 'node_modules', '.turbo'] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
-        files: ['**/*.{ts,tsx}'],
+        files: ['./**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
             globals: globals.browser,
@@ -24,7 +22,7 @@ export default tseslint.config(
             },
             'import/resolver': {
                 node: {
-                    paths: paths,
+                    paths: ['.'],
                     extensions: ['.js', '.jsx', '.ts', '.d.ts', '.tsx'],
                 },
                 typescript: {
