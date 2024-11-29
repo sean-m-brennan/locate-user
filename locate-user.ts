@@ -26,44 +26,62 @@ export function getBrowserTimeZoneOffset(): number {
         const fmt = Intl.DateTimeFormat("ia", { timeZoneName: "shortOffset" }).formatToParts(date)
         const offset = fmt.find((i) => i.type === "timeZoneName")?.value
         if (offset === undefined)
-            throw Error('No timeZoneName in DateTimeFormat')
-        const sign = offset.charAt(0) === "+" ? 1 : -1
-        const hours = parseInt(offset.slice(1, 3), 10)
-        const minutes = parseInt(offset.slice(4), 10)
+            throw Error(`No timeZoneName in DateTimeFormat`)
+        const start = offset.search(/[+-]/)
+        const sign = offset.charAt(start) === "+" ? 1 : -1
+        const mid = offset.indexOf(":", start)
+        const hours = parseInt(offset.slice(start + 1), 10)
+        let minutes = 0
+        if (mid > 0)
+            minutes = parseInt(offset.slice(mid + 1), 10)
         return sign * (hours * 60 + minutes)
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch(_err) {
+    } catch(err) {
+        console.debug(err)
         const date = new Date()
         return date.getTimezoneOffset()
     }
 }
 
-export function getApproximateBrowserLocation(): [number, number, number] {
-    const tz = getBrowserTimeZone()
+export function getApproximateBrowserLocation(overrideTimezone?: string): [number, number, number] {
+    const tz = overrideTimezone || getBrowserTimeZone()
     try {
         const loc = timezoneToLocation(tz)
-        return [loc[0], loc[1], 10.0]  // sea-level
+        return [loc[0], loc[1], 10.0]  // sea-level-ish
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch(_err) {
-        const offset = getBrowserTimeZoneOffset()
-        const lon = 180.0 / 12 * offset
+    } catch(err) {
+        console.debug(err)
+        let offset
+        try {
+            offset = getBrowserTimeZoneOffset()
+        } catch(err) {
+            console.error(err)
+            return [0, 0, 0]
+        }
+        const lon = (180.0 / (12 * 60.0)) * offset
         return [0.0, lon, 10.0]  // equator at sea-level
     }
 }
 
-export function getBrowserLocation(): [number, number, number] {
+export function getBrowserLocation(overrideTimezone?: string): [number, number, number] {
     let latLonAlt: [number, number, number] = [0,0,0]
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition((geoPos) => {
+        const getCoords = () => new Promise(
+            (resolve: PositionCallback, reject: PositionErrorCallback) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject)
+            })
+
+        getCoords()
+            .then((geoPos: GeolocationPosition) => {
                 const lat = geoPos.coords.latitude
                 const lon = geoPos.coords.longitude
                 const alt = geoPos.coords.altitude || 0
                 latLonAlt = [lat, lon, alt]
-            },
-            () => {  // fallback
-                latLonAlt = getApproximateBrowserLocation()
+            })
+            .catch((err: GeolocationPositionError) => {
+                console.debug(err)
+                latLonAlt = getApproximateBrowserLocation(overrideTimezone)
             })
     } else
-        latLonAlt = getApproximateBrowserLocation()
+        latLonAlt = getApproximateBrowserLocation(overrideTimezone)
     return latLonAlt
 }

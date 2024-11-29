@@ -1,6 +1,6 @@
 {
   "name": "locate-user",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "authors": [
     "Sean Brennan <sean_m_brennan@mail.com>"
   ],
@@ -34,8 +34,8 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "scripts": {
-    "prebuild": "npm install",
-    "build": "tz/ingest_tz_table.node.js && tsc -b && vite build",
+    "prebuild": "npm install && ./tz/ingest_tz_table.node.js",
+    "build": "tsc -b && vite build",
     "postbuild": "cp -r ./dist/* ./",
     "lint": "eslint \"./**/*.ts\"",
     "clean": "rm -rf ./dist ./locate-user.{js,cjs,d.ts}",

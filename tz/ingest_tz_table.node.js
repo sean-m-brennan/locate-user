@@ -70,7 +70,8 @@ const zoneLocationToTypescript = (zone2location) => {
     content += 'export function timezoneToLocation(tz: string): [number, number] {\n'
     content +='    if (tz in tzTable)\n'
     content += '        return tzTable[tz]\n'
-    content += '    throw new Error(`Bad/unknown timezone: $tz`)\n'
+    content += `    throw new Error(\`Unknown timezone: $\{tz\}\`)
+`
     content += '}\n'
     content += '\n'
     try {
