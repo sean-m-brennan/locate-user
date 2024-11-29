@@ -8,7 +8,7 @@ import * as fs from "node:fs"
 const plugins: PluginOption[] = [
   dts({
     rollupTypes: true,
-    outDir: '.',
+    outDir: 'dist',
     tsconfigPath: './tsconfig.app.json',
   }),
 ]
@@ -24,7 +24,9 @@ export default defineConfig({
   root: resolve(__dirname),
   build: {
     lib: {
-      entry: resolve(__dirname, "locate-user.ts"),
+      entry: resolve(__dirname, "index.ts"),
+      name: "locate-user",
+      fileName: "index",
       formats: ["es", "cjs"],
     },
   },
