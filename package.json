@@ -4,7 +4,7 @@
   "authors": [
     "Sean Brennan <sean_m_brennan@mail.com>"
   ],
-  "homepage": "https://sean-m-brennan.github.io/locate-user/",
+  "homepage": "https://github.com/sean-m-brennan/locate-user",
   "license": "Apache-2.0",
   "private": true,
   "engines": {

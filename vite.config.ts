@@ -22,7 +22,6 @@ if (process.env.TURBO_HASH === undefined && !fs.existsSync('.turbo')) {
 export default defineConfig({
   plugins: plugins,
   root: resolve(__dirname),
-  base: "/locate-user/",
   build: {
     lib: {
       entry: resolve(__dirname, "locate-user.ts"),
