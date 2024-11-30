@@ -33,12 +33,13 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "scripts": {
-    "prebuild": "npm install && src/tz/ingest_tz_table.node.js",
+    "prebuild": "npm install && lib/tz/ingest_tz_table.node.js",
     "build": "tsc -b && vite build",
-    "prepublish": "cp -r ./dist/* ./",
+    "prepublish": "pm run build && cp -r ./dist/* ./",
     "publish": "npm publish",
+    "postpublish": "rm -f ./index.js ./index.cjs ./index.d.ts",
     "lint": "eslint \"./**/*.ts\"",
-    "clean": "rm -rf ./dist ./index.js ./index.cjs ./index.d.ts",
+    "clean": "rm -rf ./dist && npm run postpublish",
     "pristine": "npm run clean && rm -rf node_modules"
   }
 }

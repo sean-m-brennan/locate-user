@@ -1,6 +1,6 @@
 /node_modules/
-/src/tz/tz_table.ts
-/src/tz/zone1970.tab
+/lib/tz/tz_table.ts
+/lib/tz/zone1970.tab
 /dist/
 /.vite/
 *.tsbuildinfo

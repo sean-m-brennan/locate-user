@@ -1,1 +1,1 @@
-export { getBrowserTimeZone, getBrowserTimeZoneOffset, getApproximateBrowserLocation, getBrowserLocation } from "./src/location"
+export { getBrowserTimeZone, getBrowserTimeZoneOffset, getApproximateBrowserLocation, getBrowserLocation } from "./lib/location"
