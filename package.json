@@ -16,6 +16,7 @@
   "exports": "./index.js",
   "files": [
     "./index.js",
+    "./index.js.map",
     "./index.d.ts",
     "./index.cjs"
   ],
@@ -36,7 +37,7 @@
   "scripts": {
     "prebuild": "npm install && lib/tz/ingest_tz_table.node.js",
     "build": "tsc -b && vite build",
-    "prepublish": "pm run build && cp -r ./dist/* ./",
+    "prepublish": "npm run build && cp -r ./dist/* ./",
     "publish": "npm publish",
     "postpublish": "rm -f ./index.js ./index.cjs ./index.d.ts",
     "lint": "eslint \"./**/*.ts\"",
